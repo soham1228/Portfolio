@@ -2,7 +2,13 @@ import React from 'react';
 import { AppBar, Toolbar, Typography, Button, IconButton, Box } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
-const Navbar = ({ navItems, scrollToSection, isMobile, setMobileOpen }) => {
+const Navbar = ({
+  navItems = [],
+  scrollToSection = () => {},
+  isMobile = false,
+  setMobileOpen = () => {},
+}) => {
+
   return (
     <AppBar 
       position="fixed" 
@@ -22,7 +28,7 @@ const Navbar = ({ navItems, scrollToSection, isMobile, setMobileOpen }) => {
           </IconButton>
         ) : (
           <Box sx={{ display: 'flex', gap: 2 }}>
-            {navItems.map((item) => (
+            {navItems?.map((item) => (
               <Button
                 key={item.label}
                 color="inherit"

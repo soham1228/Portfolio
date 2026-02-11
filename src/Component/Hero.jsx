@@ -1,46 +1,44 @@
-import React from 'react';
-import { AppBar, Toolbar, Typography, Button, IconButton, Box } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
+import React from "react";
+import { Box, Container, Typography, Button } from "@mui/material";
 
-const Navbar = ({ navItems, scrollToSection, isMobile, setMobileOpen }) => {
+const Hero = ({ heroRef }) => {
   return (
-    <AppBar 
-      position="fixed" 
-      sx={{ 
-        background: 'rgba(10, 14, 39, 0.9)',
-        backdropFilter: 'blur(10px)',
+    <Box
+      ref={heroRef}
+      sx={{
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+        background: "#0a0e27",
+        color: "white",
       }}
     >
-      <Toolbar>
-        <Typography variant="h6" sx={{ flexGrow: 1, fontFamily: '"Orbitron", sans-serif' }}>
-          Soham Shukla
+      <Container maxWidth="md">
+        <Typography
+          variant="h2"
+          sx={{
+            fontFamily: '"Orbitron", sans-serif',
+            mb: 3,
+          }}
+        >
+          Hi, I'm Soham 👋
         </Typography>
-        
-        {isMobile ? (
-          <IconButton color="inherit" onClick={() => setMobileOpen(true)}>
-            <MenuIcon />
-          </IconButton>
-        ) : (
-          <Box sx={{ display: 'flex', gap: 2 }}>
-            {navItems.map((item) => (
-              <Button
-                key={item.label}
-                color="inherit"
-                onClick={() => scrollToSection(item.ref)}
-                sx={{
-                  '&:hover': {
-                    color: '#00d9ff',
-                  }
-                }}
-              >
-                {item.label}
-              </Button>
-            ))}
-          </Box>
-        )}
-      </Toolbar>
-    </AppBar>
+
+        <Typography variant="h5" sx={{ color: "#94a3b8", mb: 4 }}>
+          Full Stack Developer | AI Automation Builder | App Developer
+        </Typography>
+
+        <Button
+          variant="contained"
+          sx={{
+            background: "linear-gradient(135deg, #00d9ff 0%, #6366f1 100%)",
+          }}
+        >
+          View My Work
+        </Button>
+      </Container>
+    </Box>
   );
 };
 
-export default Navbar;
+export default Hero;
