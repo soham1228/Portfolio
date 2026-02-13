@@ -1,46 +1,68 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0a0e27" />
-    
+
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Soham Shukla - Full Stack Developer, AI Automation Builder & App Developer from Vadodara, Gujarat. Specializing in React, Python, and modern web technologies." />
-    <meta name="keywords" content="Soham Shukla, Full Stack Developer, React Developer, Python Developer, AI Automation, Mobile App Development, Web Developer Portfolio, Vadodara Developer" />
+    <meta
+      name="description"
+      content="Soham Shukla - Full Stack Developer, AI Automation Builder & App Developer from Vadodara, Gujarat. Specializing in React, Python, and modern web technologies."
+    />
+    <meta
+      name="keywords"
+      content="Soham Shukla, Full Stack Developer, React Developer, Python Developer, AI Automation, Mobile App Development, Web Developer Portfolio, Vadodara Developer"
+    />
     <meta name="author" content="Soham Shukla" />
-    
+
     <!-- Open Graph Meta Tags -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Soham Shukla | Full Stack Developer Portfolio" />
-    <meta property="og:description" content="Full Stack Developer specializing in AI Automation, React, and modern web technologies." />
+    <meta
+      property="og:title"
+      content="Soham Shukla | Full Stack Developer Portfolio"
+    />
+    <meta
+      property="og:description"
+      content="Full Stack Developer specializing in AI Automation, React, and modern web technologies."
+    />
     <meta property="og:url" content="https://yourwebsite.com" />
     <meta property="og:site_name" content="Soham Shukla Portfolio" />
-    
+
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Soham Shukla | Full Stack Developer" />
-    <meta name="twitter:description" content="Full Stack Developer specializing in AI Automation, React, and modern web technologies." />
-    
+    <meta
+      name="twitter:description"
+      content="Full Stack Developer specializing in AI Automation, React, and modern web technologies."
+    />
+
     <!-- Favicon -->
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    
+
     <!-- Manifest -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    
+
     <!-- Google Fonts - Preconnect for Performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    
+
     <!-- Google Fonts - Inter & Orbitron -->
-    <link 
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap" 
-      rel="stylesheet" 
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
     />
-    
+    <!-- Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
     <title>Soham Shukla | Full Stack Developer Portfolio</title>
-    
+
     <style>
       /* Loading Screen */
       #loading-screen {
@@ -56,12 +78,12 @@
         z-index: 9999;
         transition: opacity 0.5s ease;
       }
-      
+
       #loading-screen.hidden {
         opacity: 0;
         pointer-events: none;
       }
-      
+
       .loader {
         width: 50px;
         height: 50px;
@@ -70,31 +92,35 @@
         border-radius: 50%;
         animation: spin 1s linear infinite;
       }
-      
+
       @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
       }
     </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    
+
     <!-- Loading Screen -->
     <div id="loading-screen">
       <div class="loader"></div>
     </div>
-    
+
     <!-- React Root -->
     <div id="root"></div>
-    
+
     <script>
       // Hide loading screen when page is loaded
-      window.addEventListener('load', function() {
-        setTimeout(function() {
-          document.getElementById('loading-screen').classList.add('hidden');
-          setTimeout(function() {
-            document.getElementById('loading-screen').remove();
+      window.addEventListener("load", function () {
+        setTimeout(function () {
+          document.getElementById("loading-screen").classList.add("hidden");
+          setTimeout(function () {
+            document.getElementById("loading-screen").remove();
           }, 500);
         }, 500);
       });

@@ -2,14 +2,14 @@ import React, { useEffect, useRef } from 'react';
 import { Box, Container, Typography, Grid, Card, CardContent } from '@mui/material';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useFadeInUp, useSlideInLeft, useSlideInRight } from '../GsapAnimations';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const About = ({ aboutRef }) => {
-  const titleRef = useRef(null);
-  const leftCardRef = useRef(null);
-  const rightCardRef = useRef(null);
-  const achievementsRef = useRef([]);
+  const titleRef = useFadeInUp();
+  const leftCardRef = useSlideInLeft();
+  const rightCardRef = useSlideInRight();
 
   const achievements = [
     '🏆 2x Gold Medalist in College Science Fest',
@@ -18,109 +18,13 @@ const About = ({ aboutRef }) => {
     '🎨 Active E-commerce Materials',
   ];
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Title animation
-      gsap.from(titleRef.current, {
-        scrollTrigger: {
-          trigger: titleRef.current,
-          start: 'top 80%',
-          end: 'bottom 60%',
-          toggleActions: 'play none none reverse',
-        },
-        y: 100,
-        opacity: 0,
-        duration: 1,
-        ease: 'power3.out',
-      });
-
-      // Left card animation
-      gsap.from(leftCardRef.current, {
-        scrollTrigger: {
-          trigger: leftCardRef.current,
-          start: 'top 80%',
-          end: 'bottom 60%',
-          toggleActions: 'play none none reverse',
-        },
-        x: -100,
-        opacity: 0,
-        duration: 1,
-        ease: 'power3.out',
-      });
-
-      // Right card animation
-      gsap.from(rightCardRef.current, {
-        scrollTrigger: {
-          trigger: rightCardRef.current,
-          start: 'top 80%',
-          end: 'bottom 60%',
-          toggleActions: 'play none none reverse',
-        },
-        x: 100,
-        opacity: 0,
-        duration: 1,
-        ease: 'power3.out',
-      });
-
-      // Achievement items stagger animation
-      gsap.from(achievementsRef.current, {
-        scrollTrigger: {
-          trigger: rightCardRef.current,
-          start: 'top 70%',
-          end: 'bottom 60%',
-          toggleActions: 'play none none reverse',
-        },
-        y: 30,
-        opacity: 0,
-        duration: 0.6,
-        stagger: 0.15,
-        ease: 'power2.out',
-      });
-
-      // Parallax effect on scroll
-      gsap.to(leftCardRef.current, {
-        scrollTrigger: {
-          trigger: aboutRef?.current,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: 1,
-        },
-        y: -30,
-      });
-
-      gsap.to(rightCardRef.current, {
-        scrollTrigger: {
-          trigger: aboutRef?.current,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: 1,
-        },
-        y: 30,
-      });
-    }, aboutRef);
-
-    return () => ctx.revert();
-  }, [aboutRef]);
-
   return (
     <Box 
       ref={aboutRef} 
       sx={{ 
-        py: 12, 
-        background: '#1a1f3a',
+        py: { xs: 8, md: 12 },
         position: 'relative',
-        overflow: 'hidden',
-        '&::before': {
-          content: '""',
-          position: 'absolute',
-          top: '20%',
-          right: '-10%',
-          width: '500px',
-          height: '500px',
-          background: 'radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%)',
-          borderRadius: '50%',
-          pointerEvents: 'none',
-        },
+        zIndex: 1,
       }}
     >
       <Container maxWidth="lg">
@@ -128,15 +32,16 @@ const About = ({ aboutRef }) => {
           ref={titleRef}
           variant="h2" 
           sx={{ 
-            mb: 6, 
+            mb: { xs: 4, md: 8 },
             textAlign: 'center', 
-            fontSize: { xs: '2rem', md: '3rem' },
+            fontSize: { xs: '2.5rem', sm: '3rem', md: '4rem' },
             fontFamily: '"Orbitron", sans-serif',
-            background: 'linear-gradient(135deg, #fff 0%, #00d9ff 100%)',
+            fontWeight: 800,
+            background: 'linear-gradient(135deg, #ffffff 0%, #00f0ff 50%, #a855f7 100%)',
             backgroundClip: 'text',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
-            fontWeight: 700,
+            textShadow: '0 0 40px rgba(0, 240, 255, 0.3)',
           }}
         >
           About Me
@@ -147,18 +52,34 @@ const About = ({ aboutRef }) => {
             <Card 
               ref={leftCardRef}
               sx={{ 
-                height: '100%', 
-                p: 3,
-                background: 'rgba(255, 255, 255, 0.05)',
-                backdropFilter: 'blur(10px)',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-                borderRadius: '16px',
-                transition: 'all 0.4s ease',
+                height: '100%',
+                p: { xs: 2, sm: 3 },
+                background: 'rgba(15, 23, 42, 0.6)',
+                backdropFilter: 'blur(20px)',
+                border: '1px solid rgba(0, 240, 255, 0.1)',
+                borderRadius: '20px',
+                position: 'relative',
+                overflow: 'hidden',
+                '&::before': {
+                  content: '""',
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  height: '3px',
+                  background: 'linear-gradient(90deg, transparent, #00f0ff, transparent)',
+                  opacity: 0,
+                  transition: 'opacity 0.3s',
+                },
                 '&:hover': {
                   transform: 'translateY(-10px)',
-                  boxShadow: '0 20px 60px rgba(0, 217, 255, 0.2)',
-                  border: '1px solid rgba(0, 217, 255, 0.3)',
+                  border: '1px solid rgba(0, 240, 255, 0.3)',
+                  boxShadow: '0 20px 60px rgba(0, 240, 255, 0.2)',
+                  '&::before': {
+                    opacity: 1,
+                  },
                 },
+                transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
               }}
             >
               <CardContent>
@@ -166,9 +87,10 @@ const About = ({ aboutRef }) => {
                   variant="h5" 
                   gutterBottom 
                   sx={{ 
-                    color: '#00d9ff', 
-                    mb: 2,
-                    fontWeight: 600,
+                    color: '#00f0ff',
+                    mb: 3,
+                    fontWeight: 700,
+                    fontFamily: '"Space Grotesk", sans-serif',
                   }}
                 >
                   Who I Am
@@ -177,9 +99,9 @@ const About = ({ aboutRef }) => {
                   variant="body1" 
                   paragraph 
                   sx={{ 
-                    color: '#94a3b8', 
+                    color: '#cbd5e1',
                     lineHeight: 1.8,
-                    fontSize: '1.05rem',
+                    fontSize: { xs: '0.95rem', sm: '1.05rem' },
                   }}
                 >
                   A passionate Software Developer and Creative Technologist from Vadodara, Gujarat. 
@@ -188,9 +110,9 @@ const About = ({ aboutRef }) => {
                 <Typography 
                   variant="body1" 
                   sx={{ 
-                    color: '#94a3b8', 
+                    color: '#cbd5e1',
                     lineHeight: 1.8,
-                    fontSize: '1.05rem',
+                    fontSize: { xs: '0.95rem', sm: '1.05rem' },
                   }}
                 >
                   Currently pursuing B.Tech in Computer Science from Neotech Institute of Technology (GTU), 
@@ -204,18 +126,34 @@ const About = ({ aboutRef }) => {
             <Card 
               ref={rightCardRef}
               sx={{ 
-                height: '100%', 
-                p: 3,
-                background: 'rgba(255, 255, 255, 0.05)',
-                backdropFilter: 'blur(10px)',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-                borderRadius: '16px',
-                transition: 'all 0.4s ease',
+                height: '100%',
+                p: { xs: 2, sm: 3 },
+                background: 'rgba(15, 23, 42, 0.6)',
+                backdropFilter: 'blur(20px)',
+                border: '1px solid rgba(168, 85, 247, 0.1)',
+                borderRadius: '20px',
+                position: 'relative',
+                overflow: 'hidden',
+                '&::before': {
+                  content: '""',
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  height: '3px',
+                  background: 'linear-gradient(90deg, transparent, #a855f7, transparent)',
+                  opacity: 0,
+                  transition: 'opacity 0.3s',
+                },
                 '&:hover': {
                   transform: 'translateY(-10px)',
-                  boxShadow: '0 20px 60px rgba(99, 102, 241, 0.2)',
-                  border: '1px solid rgba(99, 102, 241, 0.3)',
+                  border: '1px solid rgba(168, 85, 247, 0.3)',
+                  boxShadow: '0 20px 60px rgba(168, 85, 247, 0.2)',
+                  '&::before': {
+                    opacity: 1,
+                  },
                 },
+                transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
               }}
             >
               <CardContent>
@@ -223,9 +161,10 @@ const About = ({ aboutRef }) => {
                   variant="h5" 
                   gutterBottom 
                   sx={{ 
-                    color: '#00d9ff', 
-                    mb: 2,
-                    fontWeight: 600,
+                    color: '#a855f7',
+                    mb: 3,
+                    fontWeight: 700,
+                    fontFamily: '"Space Grotesk", sans-serif',
                   }}
                 >
                   🏆 Achievements
@@ -233,21 +172,21 @@ const About = ({ aboutRef }) => {
                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                   {achievements.map((item, index) => (
                     <Typography 
-                      key={index} 
-                      ref={(el) => (achievementsRef.current[index] = el)}
+                      key={index}
                       variant="body1" 
                       sx={{ 
-                        color: '#94a3b8',
-                        fontSize: '1.05rem',
-                        padding: '12px',
-                        borderRadius: '8px',
-                        background: 'rgba(0, 217, 255, 0.05)',
-                        border: '1px solid rgba(0, 217, 255, 0.1)',
-                        transition: 'all 0.3s ease',
+                        color: '#cbd5e1',
+                        fontSize: { xs: '0.95rem', sm: '1.05rem' },
+                        padding: '14px 18px',
+                        borderRadius: '12px',
+                        background: 'rgba(168, 85, 247, 0.05)',
+                        border: '1px solid rgba(168, 85, 247, 0.1)',
+                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                         '&:hover': {
-                          background: 'rgba(0, 217, 255, 0.1)',
+                          background: 'rgba(168, 85, 247, 0.15)',
                           transform: 'translateX(10px)',
-                          borderLeft: '3px solid #00d9ff',
+                          borderLeft: '3px solid #a855f7',
+                          boxShadow: '0 4px 12px rgba(168, 85, 247, 0.2)',
                         },
                       }}
                     >
